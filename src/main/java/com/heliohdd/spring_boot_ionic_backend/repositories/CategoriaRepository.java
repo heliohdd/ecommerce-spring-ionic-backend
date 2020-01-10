@@ -9,4 +9,5 @@ import com.heliohdd.spring_boot_ionic_backend.domain.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
+
 }
