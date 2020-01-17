@@ -1,13 +1,13 @@
 package com.heliohdd.spring_boot_ionic_backend.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.heliohdd.spring_boot_ionic_backend.domain.enums.EstadoPagamento;
 
 @Entity
-public class PagamentoComCartao extends Pagamento implements Serializable {
+@JsonTypeName("pagamentoComCartao")
+public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
 	private Integer numeroDeParcelas;
@@ -20,11 +20,11 @@ public class PagamentoComCartao extends Pagamento implements Serializable {
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
 
-	public Integer getId() {
+	public Integer getNumeroDeParcelas() {
 		return numeroDeParcelas;
 	}
 
-	public void setId(Integer id) {
-		this.numeroDeParcelas = id;
+	public void setNumeroDeParcelas (Integer numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
 	}
 }

@@ -1,15 +1,16 @@
 package com.heliohdd.spring_boot_ionic_backend.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.heliohdd.spring_boot_ionic_backend.domain.enums.EstadoPagamento;
 
 @Entity
-public class PagamentoComBoleto extends Pagamento implements Serializable {
+@JsonTypeName("pagamentoComBoleto")
+public class PagamentoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -31,8 +32,8 @@ public class PagamentoComBoleto extends Pagamento implements Serializable {
 		return dataVencimento;
 	}
 
-	public void setId(Date id) {
-		this.dataVencimento = id;
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
 	}
 
 	public Date getDataPagamento() {
