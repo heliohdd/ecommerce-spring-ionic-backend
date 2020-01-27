@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.heliohdd.spring_boot_ionic_backend.services.DBService;
+import com.heliohdd.spring_boot_ionic_backend.services.EmailService;
+import com.heliohdd.spring_boot_ionic_backend.services.MockEmailService;
 
 
 @Configuration
@@ -22,5 +24,10 @@ public class TestConfig {
 	public boolean instantiateDatabase() throws ParseException {
 		dbService.instantiateTestDatabase();
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
 	}
 }
