@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.heliohdd.spring_boot_ionic_backend.services.DBService;
+import com.heliohdd.spring_boot_ionic_backend.services.EmailService;
+import com.heliohdd.spring_boot_ionic_backend.services.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -28,5 +30,10 @@ public class DevConfig {
 
 		dbService.instantiateTestDatabase();
 		return true;
+	}
+	
+@Bean
+	public EmailService emailService() {
+		return new SmtpEmailService();
 	}
 }
