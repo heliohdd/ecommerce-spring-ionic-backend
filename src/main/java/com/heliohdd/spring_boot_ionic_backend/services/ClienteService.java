@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 import com.heliohdd.spring_boot_ionic_backend.domain.Cidade;
 import com.heliohdd.spring_boot_ionic_backend.domain.Cliente;
 import com.heliohdd.spring_boot_ionic_backend.domain.Endereco;
+import com.heliohdd.spring_boot_ionic_backend.domain.enums.Perfil;
 import com.heliohdd.spring_boot_ionic_backend.domain.enums.TipoCliente;
 import com.heliohdd.spring_boot_ionic_backend.dto.ClienteDTO;
 import com.heliohdd.spring_boot_ionic_backend.dto.ClienteNewDTO;
 import com.heliohdd.spring_boot_ionic_backend.repositories.ClienteRepository;
 import com.heliohdd.spring_boot_ionic_backend.repositories.EnderecoRepository;
+import com.heliohdd.spring_boot_ionic_backend.security.UserSS;
+import com.heliohdd.spring_boot_ionic_backend.services.exception.AuthorizationException;
 import com.heliohdd.spring_boot_ionic_backend.services.exception.DataIntegrityException;
 import com.heliohdd.spring_boot_ionic_backend.services.exception.ObjectNotFoundException;
 
@@ -35,6 +38,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

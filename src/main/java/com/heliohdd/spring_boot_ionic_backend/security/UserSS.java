@@ -46,7 +46,6 @@ public class UserSS implements UserDetails {
 	public String getUsername() {
 		return email;
 	}
-
 	
 	@Override
 	public boolean isAccountNonExpired() {
@@ -66,5 +65,9 @@ public class UserSS implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 }
